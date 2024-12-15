@@ -108,7 +108,7 @@ async def image(description="", context=None, w=1024, h=1024, steps=20, cfg=8):
     fname = await text_to_image(prompt, context=context, w=w, h=h, steps=steps, cfg=cfg)
     if fname:
         print(f"Image output to file: {fname}")
-        await context.insert_image("/ah_flux/" + fname)
+        await context.insert_image("/ah_flux" + fname)
     else:
         print("Failed to generate image")
 
