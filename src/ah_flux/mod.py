@@ -75,7 +75,7 @@ async def text_to_image(prompt, model_id=None, from_huggingface=None,
                             image_data = await resp.read()
                             image = Image.open(io.BytesIO(image_data))
                             fname = f"/static/imgs/{random_img_fname()}"
-                            image.save(script_locaion / fname)
+                            image.save(script_location / fname)
                             print(f"Image saved to {fname}")
                             return fname
             else:
