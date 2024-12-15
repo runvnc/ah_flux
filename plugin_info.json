@@ -1,5 +1,5 @@
 {
-  "name": "Flux AI Image Generation",
+  "name": "ah_flux",
   "version": "1.0.0",
   "description": "Generate images using Flux AI's image generation API",
   "services": ["select_image_model", "text_to_image"],
