@@ -22,4 +22,4 @@ package-dir = {"" = "src"}
 packages = ["ah_flux"]
 
 [tool.setuptools.package-data]
-ah_flux = ["static/**/*", "schemas/**/*"]
+ah_flux = ["static/**/*"]
