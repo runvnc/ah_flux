@@ -58,6 +58,8 @@ async def select_image_model(context=None, model_id=None, local=False, uncensore
 async def text_to_image(prompt, model_id=None, from_huggingface=None,
                         count=1, context=None, save_to="imgs/" + random_img_fname(), w=1024, h=1024, steps=20, cfg=8):
     print("text_to_image: Generating image with Flux AI")
+    script_location = os.path.dirname(os.path.realpath(__file__))
+    
     try:
         model = await select_image_model(context)
         print(f"Using model: {model['name']}")
@@ -72,8 +74,8 @@ async def text_to_image(prompt, model_id=None, from_huggingface=None,
                         if resp.status == 200:
                             image_data = await resp.read()
                             image = Image.open(io.BytesIO(image_data))
-                            fname = f"imgs/{random_img_fname()}"
-                            image.save(fname)
+                            fname = f"/static/imgs/{random_img_fname()}"
+                            image.save(script_locaion / fname)
                             print(f"Image saved to {fname}")
                             return fname
             else:
@@ -106,7 +108,7 @@ async def image(description="", context=None, w=1024, h=1024, steps=20, cfg=8):
     fname = await text_to_image(prompt, context=context, w=w, h=h, steps=steps, cfg=cfg)
     if fname:
         print(f"Image output to file: {fname}")
-        await context.insert_image("/" + fname)
+        await context.insert_image("/ah_flux/" + fname)
     else:
         print("Failed to generate image")
 
