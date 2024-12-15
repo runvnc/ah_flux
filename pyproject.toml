@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ah_flux"
+version = "1.0.0"
+description = "Flux AI Image Generation Plugin"
+requires-python = ">=3.8"
+dependencies = [
+    "fal-client",
+    "aiohttp",
+    "nanoid",
+    "Pillow"
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
