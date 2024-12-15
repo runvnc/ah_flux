@@ -16,3 +16,10 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["ah_flux"]
+
+[tool.setuptools.package-data]
+ah_flux = [static/**/*", "schemas/**/*"]
