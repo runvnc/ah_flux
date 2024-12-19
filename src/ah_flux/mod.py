@@ -109,6 +109,7 @@ async def image(description="", context=None, w=1024, h=1024, steps=20, cfg=8):
     if fname:
         print(f"Image output to file: {fname}")
         await context.insert_image("/ah_flux" + fname)
+        return f"Image generated at /ah_flux{fname} and inserted into chat UI"
     else:
         print("Failed to generate image")
 
