@@ -77,8 +77,8 @@ async def text_to_image(prompt, model_id=None, from_huggingface=None,
                             fname = f"/static/imgs/{random_img_fname()}"
                             image.save(f"{script_location}{fname}")
                             print(f"Image saved to {fname}")
-                            # resolve absolute path
-                            abs_path = os.path.join(script_location, fname)
+                            real_abs_path = os.path.realpath(f"{script_location}{fname}")
+                            print("abs_path", abs_path)
                             return abs_path
             else:
                 print("No image generated or error in result")
