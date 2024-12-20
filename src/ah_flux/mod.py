@@ -77,7 +77,7 @@ async def text_to_image(prompt, model_id=None, from_huggingface=None,
                             fname = f"/static/imgs/{random_img_fname()}"
                             image.save(f"{script_location}{fname}")
                             print(f"Image saved to {fname}")
-                            return fname
+                            return "ah_flux" + fname
             else:
                 print("No image generated or error in result")
         return None
@@ -108,8 +108,8 @@ async def image(description="", context=None, w=1024, h=1024, steps=20, cfg=8):
     fname = await text_to_image(prompt, context=context, w=w, h=h, steps=steps, cfg=cfg)
     if fname:
         print(f"Image output to file: {fname}")
-        await context.insert_image("/ah_flux" + fname)
-        return f"Image generated at /ah_flux{fname} and inserted into chat UI"
+        await context.insert_image(fname)
+        return f"Image generated at {fname} and inserted into chat UI"
     else:
         print("Failed to generate image")
 
