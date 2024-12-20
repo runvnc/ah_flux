@@ -77,7 +77,9 @@ async def text_to_image(prompt, model_id=None, from_huggingface=None,
                             fname = f"/static/imgs/{random_img_fname()}"
                             image.save(f"{script_location}{fname}")
                             print(f"Image saved to {fname}")
-                            return "ah_flux" + fname
+                            # resolve absolute path
+                            abs_path = os.path.join(script_location, fname)
+                            return abs_path
             else:
                 print("No image generated or error in result")
         return None
@@ -108,8 +110,10 @@ async def image(description="", context=None, w=1024, h=1024, steps=20, cfg=8):
     fname = await text_to_image(prompt, context=context, w=w, h=h, steps=steps, cfg=cfg)
     if fname:
         print(f"Image output to file: {fname}")
-        await context.insert_image(fname)
-        return f"Image generated at {fname} and inserted into chat UI"
+        # we need to strip everthing before 'ah_flux' because this is now a relative URL not file system path
+        rel_url = fname.split('ah_flux')[1]
+        await context.insert_image(rel_url)
+        return f"Image generated at {rel_url} and inserted into chat UI"
     else:
         print("Failed to generate image")
 
