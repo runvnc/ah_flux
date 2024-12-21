@@ -110,7 +110,7 @@ async def image(description="", context=None, w=1024, h=1024, steps=20, cfg=8):
     if fname:
         print(f"Image output to file: {fname}")
         # we need to strip everthing before 'ah_flux' because this is now a relative URL not file system path
-        rel_url = path[path.rindex('ah_flux'):]
+        rel_url = fname[fname.rindex('ah_flux'):]
         print("rel_url", rel_url)
         await context.insert_image(rel_url)
         return f"Image generated at {rel_url} and inserted into chat UI"
