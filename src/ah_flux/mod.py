@@ -113,6 +113,9 @@ async def image(description="", context=None, w=1024, h=1024, steps=20, cfg=8):
         rel_url = "/" + fname[fname.rindex('ah_flux'):]
         print("rel_url", rel_url)
         await context.insert_image(rel_url)
+        obj = { "markdown": f"![pic_of_me]({rel_url})" }
+        await context.run_command('json_encoded_md', obj)
+
         return f"Image generated at {rel_url} and inserted into chat UI"
     else:
         print("Failed to generate image")
